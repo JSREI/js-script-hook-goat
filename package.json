@@ -1,0 +1,13 @@
+{
+  "name": "js-script-hook-goat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:JSREI/js-script-hook-goat.git",
+  "author": "CC11001100 <CC11001100@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "express": "^4.21.2",
+    "body-parser": "^1.20.3"
+  }
+}
