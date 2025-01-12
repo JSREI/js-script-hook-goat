@@ -4,7 +4,7 @@
 
 这个页面上点击"发送JSONP请求"按钮的时候，会向后端发送一个jsop的请求上报数据：
 
-![image-20250112002041376](README.assets/image-20250112002041376.png)
+![image-20250113031216910](./README.assets/image-20250113031216910.png)
 
 但是上报的数据参数是加密的：
 
@@ -50,9 +50,9 @@ https://github.com/JSREI/js-script-hook?tab=readme-ov-file#%E4%BA%8C%E5%AE%89%E8
 
 ![image-20250112020656925](README.assets/image-20250112020656925.png)
 
-增加一个匹配所有URL的断点：
+增加一个匹配所有URL的断点，因为我们只关心请求参数上的加密，所以我们只需要开启请求断点就可以了：
 
-![image-20250112020725546](README.assets/image-20250112020725546.png)
+![image-20250113031507166](./README.assets/image-20250113031507166.png)
 
 然后回到页面上点击“发送JSONP请求”按钮，发现进入了断点，从右侧的调用栈往前追溯：
 
