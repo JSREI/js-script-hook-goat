@@ -2,7 +2,7 @@
 
 # 一、这是什么
 
-为[https://github.com/JSREI/js-script-hook](https://github.com/JSREI/js-script-hook)配备的靶场列表，用于对script类型的加密请求进行逆向练习。
+为[Script Hook](https://github.com/JSREI/js-script-hook)配备的靶场列表，用于对script类型的加密请求进行逆向练习。
 
 # 二、如何启动
 
