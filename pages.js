@@ -3,7 +3,7 @@ const path = require('path');
 
 // 定义源文件夹和目标文件夹
 const sourceDir = path.join(__dirname, 'public');
-const targetDir = path.join(__dirname, 'docs');
+const targetDir = path.join(__dirname, 'dist');
 
 // 确保目标文件夹存在
 if (!fs.existsSync(targetDir)) {
@@ -37,4 +37,4 @@ function copyFolderRecursive(source, target) {
 
 // 执行复制
 copyFolderRecursive(sourceDir, targetDir);
-console.log('All files copied from public to docs!');
+console.log('All files copied from public to dist!');

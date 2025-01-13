@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build  # 假设构建输出到 dist 文件夹
+        run: npm run pages  # 假设构建输出到 dist 文件夹
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
