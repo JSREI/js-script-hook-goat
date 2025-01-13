@@ -1,0 +1,5 @@
+/**/
+typeof _0x3f8a === 'function' && _0x3f8a({
+    "status": "success",
+    "data": "{\"name\":\"User174\",\"age\":32}"
+});

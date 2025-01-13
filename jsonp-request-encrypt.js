@@ -15,6 +15,8 @@ function registerJsonpRequestEncryptApi(app) {
         const callbackName = req.query.callback;
         const encryptedData = req.query.data;
 
+        console.log(callbackName)
+
         // 解密数据
         const secretKey = "my-secret-key";
         const decryptedData = decryptData(encryptedData, secretKey);

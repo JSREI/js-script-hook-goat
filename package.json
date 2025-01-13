@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "pages": "node pages.js",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "crypto-js": "^4.2.0",

@@ -37,4 +37,5 @@ function copyFolderRecursive(source, target) {
 
 // 执行复制
 copyFolderRecursive(sourceDir, targetDir);
+copyFolderRecursive("fake-api-server", targetDir);
 console.log('All files copied from public to dist!');
