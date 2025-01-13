@@ -90,8 +90,33 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 页脚样式 */
+        footer {
+            position: absolute; /* 绝对定位 */
+            bottom: 10px; /* 固定在底部 */
+            left: 50%; /* 水平居中 */
+            transform: translateX(-50%); /* 水平居中 */
+            font-size: 12px;
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 1;
         }
     </style>
 </head>
@@ -102,6 +127,16 @@
     <div id="result">点击按钮发送请求...</div>
     <div class="loader" id="loader"></div>
 </div>
+
+<!-- 页脚 -->
+<footer>
+    <p>
+        不会做？
+        <a href="https://github.com/JSREI/js-script-hook-goat/blob/main/docs/jsonp-request-encrypt-and-response-encrypt/README.md"
+           target="_blank">点此查看图文攻略</a>，
+        <a href="javascript:alert('录制中');">点此查看视频解说</a>
+    </p>
+</footer>
 
 <script>
     // 加密密钥（与后端一致）
@@ -145,7 +180,7 @@
 
     // 无用函数 4
     function uselessFunction4() {
-        let obj = { a: 1, b: 2, c: 3 };
+        let obj = {a: 1, b: 2, c: 3};
         let keys = Object.keys(obj);
         return keys.length;
     }
@@ -181,7 +216,7 @@
 
     // JSONP 请求
     function fetchData() {
-        const data = { name: 'CC11001100' };
+        const data = {name: 'CC11001100'};
         const encryptedData = encryptData(data);
 
         // 显示加载动画
@@ -251,7 +286,7 @@
 
     // 无用函数 9
     function uselessFunction9() {
-        let obj = { x: 1, y: 2, z: 3 };
+        let obj = {x: 1, y: 2, z: 3};
         return Object.values(obj).join(',');
     }
 
@@ -296,12 +331,12 @@
 
     // 无用函数 13
     function uselessFunction13() {
-        let obj = { a: 1, b: 2 };
+        let obj = {a: 1, b: 2};
         return Object.keys(obj).length;
     }
 
     // 无用代码块 8
-    let dummyObj = { x: 1, y: 2 };
+    let dummyObj = {x: 1, y: 2};
     for (let key in dummyObj) {
         dummyObj[key] *= 2;
     }
