@@ -197,7 +197,7 @@
         }
 
         const script = document.createElement('script');
-        script.src = `/api/jsonp-request-encrypt-and-response-encrypt?encryptedData=${encodeURIComponent(encryptedData)}&callback=handleResponse`;
+        script.src = `./api/jsonp-request-encrypt-and-response-encrypt?encryptedData=${encodeURIComponent(encryptedData)}&callback=handleResponse`;
         document.body.appendChild(script);
 
         // 无用代码块 2
