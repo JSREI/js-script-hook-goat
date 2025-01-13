@@ -5,6 +5,10 @@
   "repository": "git@github.com:JSREI/js-script-hook-goat.git",
   "author": "CC11001100 <CC11001100@qq.com>",
   "license": "MIT",
+  "scripts": {
+    "pages": "node pages.js",
+    "start": "node index.js"
+  },
   "dependencies": {
     "crypto-js": "^4.2.0",
     "express": "^4.21.2",
