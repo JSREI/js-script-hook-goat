@@ -4,6 +4,8 @@
 
 为[Script Hook](https://github.com/JSREI/js-script-hook)配备的靶场列表，用于对script类型的加密请求进行逆向练习。
 
+靶场在线部署：https://jsrei.github.io/js-script-hook-goat/ （注意，在线版本响应体固定，使用文件模拟API响应，但流程与独立部署均一致）
+
 # 二、如何启动
 
 # 2.1 从Docker启动
