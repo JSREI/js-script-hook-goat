@@ -108,6 +108,27 @@
             overflow-y: auto;
             border: 1px solid rgba(255, 255, 255, 0.5); /* 浅色边框 */
         }
+
+        /* 页脚样式 */
+        footer {
+            position: absolute; /* 绝对定位 */
+            bottom: 10px; /* 固定在底部 */
+            left: 50%; /* 水平居中 */
+            transform: translateX(-50%); /* 水平居中 */
+            font-size: 12px;
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -125,6 +146,16 @@
         <div class="result" id="resultContainer">结果将显示在这里...</div>
     </div>
 </div>
+
+<!-- 页脚 -->
+<footer>
+    <p>
+        不会做？
+        <a href="https://github.com/JSREI/js-script-hook-goat/blob/main/docs/jsonp-response-encrypt/README.md"
+           target="_blank">点此查看图文攻略</a>，
+        <a href="javascript:alert('录制中');">点此查看视频解说</a>
+    </p>
+</footer>
 
 <script>
     // 加密函数（使用 DES）
