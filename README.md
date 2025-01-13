@@ -6,6 +6,8 @@
 
 靶场在线部署：https://jsrei.github.io/js-script-hook-goat/ （注意，在线版本响应体固定，使用文件模拟API响应，但流程与独立部署均一致）
 
+![ezgif-5-72e8b325b3](./README.assets/ezgif-5-72e8b325b3.gif)
+
 # 二、如何启动
 
 # 2.1 从Docker启动
