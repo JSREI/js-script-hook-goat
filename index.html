@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Script Hook Goat</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #4facfe, #00f2fe); /* 渐变色背景（蓝绿色系） */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 文字阴影 */
+            animation: float 3s ease-in-out infinite; /* 浮动特效 */
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 列表样式 */
+        ol {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* 链接样式 */
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+            display: inline-block;
+        }
+
+        a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05); /* 鼠标悬停时放大 */
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            a {
+                font-size: 1.2rem;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Goat List</h1>
+<ol>
+    <li><a href="jsonp-request-encrypt.html">Script请求参数加密</a></li>
+    <li><a href="jsonp-response-encrypt.html">Script请求响应加密</a></li>
+    <li><a href="jsonp-request-encrypt-and-response-encrypt.html">Script请求参数和响应同时加密</a></li>
+</ol>
+</body>
+</html>
