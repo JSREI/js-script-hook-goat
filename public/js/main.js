@@ -1,72 +1,100 @@
-// 获取GitHub star数量
-function fetchStarCount() {
-    // 检查本地缓存
-    const cachedData = localStorage.getItem('githubStarData');
-    if (cachedData) {
-        const data = JSON.parse(cachedData);
-        // 检查缓存是否在一小时内
-        if (Date.now() - data.timestamp < 3600000) {
-            document.getElementById('star-count').textContent = data.stars;
-            return;
-        }
-    }
-    
-    // 如果没有缓存或缓存已过期，则获取新数据
+// 获取GitHub仓库的star数
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取GitHub仓库星星数
     fetch('https://api.github.com/repos/JSREI/js-script-hook-goat')
         .then(response => response.json())
         .then(data => {
-            const starCount = data.stargazers_count;
-            document.getElementById('star-count').textContent = starCount;
-            
-            // 保存到本地缓存
-            localStorage.setItem('githubStarData', JSON.stringify({
-                stars: starCount,
-                timestamp: Date.now()
-            }));
+            document.getElementById('star-count').textContent = data.stargazers_count || 0;
         })
         .catch(error => {
-            console.error('无法获取Star数量:', error);
-            document.getElementById('star-count').textContent = 'N/A';
+            console.error('获取仓库数据失败:', error);
         });
-}
-
-// 页面初始化
-document.addEventListener('DOMContentLoaded', function() {
-    // 获取star数
-    fetchStarCount();
     
-    // 导航激活状态处理
+    // 分屏导航功能
+    const screenDots = document.querySelectorAll('.screen-dot');
+    const screens = document.querySelectorAll('.screen');
+    const screenContainer = document.querySelector('.screen-container');
     const navLinks = document.querySelectorAll('.nav-links a');
-    const sections = document.querySelectorAll('.screen');
     
-    function setActiveLink() {
-        let currentSection = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.scrollY >= (sectionTop - sectionHeight/3)) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if(link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', setActiveLink);
-    setActiveLink(); // 初始设置
-    
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+    // 点击分屏导航点切换屏幕
+    screenDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const targetId = dot.getAttribute('data-target');
+            const targetElement = document.getElementById(targetId);
+            
+            // 平滑滚动到目标屏幕
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            
+            // 更新活动状态
+            screenDots.forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+            
+            // 更新导航菜单高亮
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${targetId}`) {
+                    link.classList.add('active');
+                }
             });
+        });
+    });
+    
+    // 点击导航链接，同步更新分页指示器
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1); // 去掉#
+            const targetElement = document.getElementById(targetId);
+            
+            // 滚动到目标元素
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            
+            // 更新导航高亮
+            navLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 更新分页指示器高亮
+            screenDots.forEach(dot => {
+                dot.classList.remove('active');
+                if(dot.getAttribute('data-target') === targetId) {
+                    dot.classList.add('active');
+                }
+            });
+        });
+    });
+    
+    // 监听滚动，更新导航点和菜单状态
+    screenContainer.addEventListener('scroll', () => {
+        const currentScrollPos = screenContainer.scrollTop;
+        const windowHeight = window.innerHeight;
+        
+        // 判断当前可见的屏幕
+        screens.forEach((screen, index) => {
+            const rect = screen.getBoundingClientRect();
+            const screenTop = rect.top + currentScrollPos - screenContainer.offsetTop;
+            const screenBottom = screenTop + screen.offsetHeight;
+            
+            // 如果当前屏幕在视口中
+            if (currentScrollPos >= screenTop - windowHeight/2 && 
+                currentScrollPos < screenBottom - windowHeight/2) {
+                const currentId = screen.getAttribute('id');
+                
+                // 更新导航点的活动状态
+                screenDots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if(dot.getAttribute('data-target') === currentId) {
+                        dot.classList.add('active');
+                    }
+                });
+                
+                // 更新导航菜单的活动状态
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
         });
     });
 }); 
