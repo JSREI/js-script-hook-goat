@@ -1,0 +1,633 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* 防止出现双滚动条 */
+    color: white;
+}
+
+/* 导航栏样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(25, 35, 60, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 15px 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    color: #4facfe;
+    margin-right: 30px;
+}
+
+.logo-icon {
+    margin-right: 10px;
+    font-size: 1.8rem;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 30px;
+    margin-right: auto;
+}
+
+.navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: transparent;
+    position: relative;
+}
+
+.navbar .nav-links a i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+.navbar .nav-links a:hover {
+    color: #4facfe;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.navbar .nav-links a.active {
+    background: rgba(79, 172, 254, 0.2);
+    color: #4facfe;
+    font-weight: bold;
+}
+
+.github-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 20px;
+    position: relative;
+}
+
+.github-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.github-link:hover {
+    color: #4facfe;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Tooltip样式 */
+.github-link::after {
+    content: "Star me on GitHub";
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1050;
+}
+
+.github-link::before {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1050;
+}
+
+.github-link:hover::after,
+.github-link:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+.github-logo {
+    font-size: 1.3rem;
+}
+
+.star-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background-color: rgba(79, 172, 254, 0.15);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(79, 172, 254, 0.3);
+    transition: all 0.3s ease;
+}
+
+.github-link:hover .star-container {
+    background-color: rgba(79, 172, 254, 0.25);
+}
+
+.star-icon {
+    color: #FFD700;
+    font-size: 0.9rem;
+    margin-right: 2px;
+}
+
+.star-count {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #f8f8f8;
+}
+
+/* 页脚样式 */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 15px 50px;
+    text-align: center;
+    z-index: 1000;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer a:hover {
+    color: #4facfe;
+    text-shadow: 0 0 3px rgba(79, 172, 254, 0.3);
+}
+
+/* 屏幕样式 */
+.screen {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px; /* 为导航栏和页脚留出空间 */
+    scroll-snap-align: start;
+    position: relative;
+}
+
+.screen-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+    scroll-behavior: smooth;
+    width: 100%;
+}
+
+/* 第一屏样式 */
+.screen-1 {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* 第二屏样式 */
+.screen-2 {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    padding-top: 80px;
+    padding-bottom: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 标题样式 */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 列表样式 */
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* 链接样式 */
+.screen a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    display: inline-block;
+}
+
+.screen a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+/* 加群信息样式 */
+.join-group {
+    text-align: center;
+    max-width: 1200px;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.join-group h2 {
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.qr-code-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.qr-code-item {
+    flex: 1;
+    min-width: 220px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px 15px 15px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: visible;
+    position: relative;
+}
+
+.qr-code-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code-item p {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 500;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.qr-code-item span {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    display: block;
+    text-align: center;
+}
+
+.qr-code {
+    width: auto;
+    max-width: 90%;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto 5px auto;
+    display: block;
+    border: 3px solid white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: white;
+    padding: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.qr-code:hover {
+    transform: scale(1.05);
+}
+
+.qr-code::after {
+    content: "点击查看大图";
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.qr-code:hover::after {
+    opacity: 1;
+}
+
+.join-button {
+    display: inline-block;
+    padding: 2px 8px; /* 减小内边距 */
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85rem; /* 缩小字体 */
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin: 0 3px;
+}
+
+.join-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .screen a, .join-group p {
+        font-size: 1.1rem;
+    }
+    
+    .join-group h2 {
+        font-size: 1.8rem;
+    }
+    
+    .github-container {
+        gap: 5px;
+    }
+    
+    .qr-code-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .qr-code-item {
+        width: 100%;
+        max-width: 280px;
+        margin-bottom: 20px;
+    }
+    
+    .qr-code {
+        max-width: 85%;
+    }
+    
+    .screen-2 {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .nav-links {
+        display: none;
+    }
+    
+    .qr-code {
+        max-width: 80%;
+    }
+    
+    .qr-code-item {
+        padding: 15px 10px;
+        min-width: 200px;
+    }
+    
+    .join-group {
+        padding: 20px 15px;
+    }
+    
+    .qr-code-item p {
+        font-size: 1rem;
+    }
+}
+
+/* Lightbox自定义样式覆盖 */
+.lb-outerContainer {
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.lb-dataContainer {
+    border-radius: 0 0 8px 8px;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    padding: 12px !important;
+}
+
+.lb-data .lb-caption {
+    font-size: 16px !important;
+    color: #fff !important;
+}
+
+.lb-data .lb-number {
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 14px !important;
+}
+
+.lb-nav a.lb-prev, 
+.lb-nav a.lb-next {
+    opacity: 0.5 !important;
+}
+
+.lb-nav a.lb-prev:hover, 
+.lb-nav a.lb-next:hover {
+    opacity: 1 !important;
+}
+
+.lb-closeContainer {
+    padding: 8px !important;
+}
+
+/* 分屏导航指示器 */
+.screen-pagination {
+    position: fixed;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 12px 8px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.screen-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.screen-dot:hover {
+    transform: scale(1.2);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.screen-dot.active {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    transform: scale(1.2);
+}
+
+.screen-dot::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.screen-dot:hover::after {
+    opacity: 1;
+    visibility: visible;
+    right: 30px;
+}
+
+/* 添加线条连接圆点 */
+.screen-pagination::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 50%;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-50%);
+    z-index: -1;
+}
+
+/* 响应式设计调整 */
+@media (max-width: 768px) {
+    .screen-pagination {
+        right: 15px;
+        padding: 10px 6px;
+    }
+    
+    .screen-dot {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .screen-dot::after {
+        font-size: 12px;
+        padding: 4px 8px;
+        right: 22px;
+    }
+    
+    .screen-dot:hover::after {
+        right: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .screen-pagination {
+        right: 10px;
+        padding: 8px 4px;
+        border-radius: 15px;
+    }
+    
+    .screen-dot {
+        width: 10px;
+        height: 10px;
+        margin: 2px 0;
+    }
+    
+    .screen-pagination::before {
+        top: 15px;
+        bottom: 15px;
+        width: 1px;
+    }
+} 

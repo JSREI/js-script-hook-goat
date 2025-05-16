@@ -14,277 +14,33 @@
     </script>
     <!-- Font Awesome图标库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            color: white;
-        }
-        
-        /* 导航栏样式 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .navbar .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .navbar .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .navbar .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-        
-        .navbar .nav-links a:hover {
-            color: #4facfe;
-        }
-        
-        .github-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .github-link {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .github-link:hover {
-            color: #4facfe;
-        }
-        
-        .github-logo {
-            font-size: 1.5rem;
-        }
-        
-        .star-count {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        
-        /* 页脚样式 */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 15px 50px;
-            text-align: center;
-            z-index: 1000;
-        }
-        
-        .footer p {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* 屏幕样式 */
-        .screen {
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 80px 20px; /* 为导航栏和页脚留出空间 */
-            scroll-snap-align: start;
-        }
-        
-        .screen-container {
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-            height: 100vh;
-        }
-        
-        /* 第一屏样式 */
-        .screen-1 {
-            background: linear-gradient(135deg, #4facfe, #00f2fe);
-        }
-        
-        /* 第二屏样式 */
-        .screen-2 {
-            background: linear-gradient(135deg, #43e97b, #38f9d7);
-            padding-top: 100px;
-            padding-bottom: 100px;
-        }
-        
-        /* 标题样式 */
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-        
-        /* 列表样式 */
-        ol {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        /* 链接样式 */
-        .screen a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.5rem;
-            margin: 10px 0;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-            display: inline-block;
-        }
-        
-        .screen a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            transform: scale(1.05);
-        }
-        
-        /* 加群信息样式 */
-        .join-group {
-            text-align: center;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            overflow-y: auto;
-            max-height: 80vh;
-        }
-        
-        .join-group h2 {
-            margin-bottom: 20px;
-            font-size: 2.2rem;
-        }
-        
-        .join-group p {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            margin-top: 20px;
-            line-height: 1.6;
-        }
-        
-        .qr-code {
-            max-width: 200px;
-            margin: 10px auto;
-            display: block;
-            border: 5px solid white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .qr-code:hover {
-            transform: scale(1.05);
-        }
-        
-        .join-button {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            margin: 0 5px;
-        }
-        
-        .join-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .screen a, .join-group p {
-                font-size: 1.1rem;
-            }
-            
-            .join-group h2 {
-                font-size: 1.8rem;
-            }
-            
-            .github-container {
-                gap: 5px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .navbar .nav-links {
-                display: none;
-            }
-        }
-    </style>
+    <!-- Lightbox2 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+    <!-- 外部CSS文件 -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- 导航栏 -->
     <div class="navbar">
-        <div class="logo">Script Hook Goat</div>
+        <div class="logo">
+            <i class="fas fa-code-branch logo-icon"></i>
+            Script Hook Goat
+        </div>
         <div class="nav-links">
-            <a href="#screen-1">首页</a>
-            <a href="#screen-2">加入我们</a>
+            <a href="#screen-1" class="active">
+                <i class="fas fa-list-alt"></i>靶场列表
+            </a>
+            <a href="#screen-2">
+                <i class="fas fa-users"></i>加入社区
+            </a>
         </div>
         <div class="github-container">
             <a href="https://github.com/JSREI/js-script-hook-goat" class="github-link" target="_blank">
                 <i class="fab fa-github github-logo"></i>
-                <span class="star-count" id="star-count">-</span>
+                <div class="star-container">
+                    <i class="fas fa-star star-icon"></i>
+                    <span class="star-count" id="star-count">-</span>
+                </div>
             </a>
         </div>
     </div>
@@ -305,68 +61,62 @@
         <div class="screen screen-2" id="screen-2">
             <div class="join-group">
                 <h2>逆向技术交流群</h2>
-                <p>扫码加入逆向技术交流群：</p>
-                <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016230653669.png" alt="逆向技术交流群二维码" class="qr-code">
                 
-                <p>如群二维码过期，可以加我个人微信，发送【逆向群】拉你进群：</p>
-                <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" alt="个人微信二维码" class="qr-code">
-                
-                <p><a href="https://t.me/jsreijsrei" target="_blank" class="join-button">点此</a>或扫码加入TG交流群：</p>
-                <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016231143315.png" alt="TG交流群二维码" class="qr-code">
+                <div class="qr-code-container">
+                    <div class="qr-code-item">
+                        <p>扫码加入逆向技术交流群：</p>
+                        <a href="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016230653669.png" data-lightbox="qrcode" data-title="微信交流群二维码">
+                            <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016230653669.png" alt="逆向技术交流群二维码" class="qr-code">
+                        </a>
+                        <span>微信交流群二维码</span>
+                    </div>
+                    
+                    <div class="qr-code-item">
+                        <p>如群二维码过期，可加我个人微信：</p>
+                        <a href="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" data-lightbox="qrcode" data-title="个人微信二维码">
+                            <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" alt="个人微信二维码" class="qr-code">
+                        </a>
+                        <span>发送【逆向群】拉你进群</span>
+                    </div>
+                    
+                    <div class="qr-code-item">
+                        <p>或扫码加入TG交流群：</p>
+                        <a href="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016231143315.png" data-lightbox="qrcode" data-title="TG交流群二维码">
+                            <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016231143315.png" alt="TG交流群二维码" class="qr-code">
+                        </a>
+                        <span>或<a href="https://t.me/jsreijsrei" target="_blank" class="join-button">点此</a>加入</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
+    <!-- 分屏导航指示器 -->
+    <div class="screen-pagination">
+        <div id="dot-1" class="screen-dot active" data-tooltip="靶场列表" data-target="screen-1"></div>
+        <div id="dot-2" class="screen-dot" data-tooltip="加入社区" data-target="screen-2"></div>
+    </div>
+    
     <!-- 页脚 -->
     <div class="footer">
-        <p>© 2023-2024 JSREI | 版本 1.0.0 | <a href="https://github.com/JSREI/js-script-hook-goat" style="color: rgba(255, 255, 255, 0.7);" target="_blank">GitHub</a></p>
+        <p>© 2025 <a href="https://github.com/JSREI/js-script-hook-goat" target="_blank">Script Hook Goat</a> - 由 <a href="https://github.com/JSREI" target="_blank">JSREI</a> 提供</p>
     </div>
 
-    <!-- JavaScript -->
+    <!-- jQuery (Lightbox2需要) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Lightbox2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+    <!-- 外部JavaScript文件 -->
+    <script src="js/main.js"></script>
+    
+    <!-- Lightbox配置 -->
     <script>
-        // 获取GitHub star数量
-        function fetchStarCount() {
-            // 检查本地缓存
-            const cachedData = localStorage.getItem('githubStarData');
-            if (cachedData) {
-                const data = JSON.parse(cachedData);
-                // 检查缓存是否在一小时内
-                if (Date.now() - data.timestamp < 3600000) {
-                    document.getElementById('star-count').textContent = data.stars;
-                    return;
-                }
-            }
-            
-            // 如果没有缓存或缓存已过期，则获取新数据
-            fetch('https://api.github.com/repos/JSREI/js-script-hook-goat')
-                .then(response => response.json())
-                .then(data => {
-                    const starCount = data.stargazers_count;
-                    document.getElementById('star-count').textContent = starCount;
-                    
-                    // 保存到本地缓存
-                    localStorage.setItem('githubStarData', JSON.stringify({
-                        stars: starCount,
-                        timestamp: Date.now()
-                    }));
-                })
-                .catch(error => {
-                    console.error('无法获取Star数量:', error);
-                    document.getElementById('star-count').textContent = 'N/A';
-                });
-        }
-        
-        // 页面加载时获取star数量
-        document.addEventListener('DOMContentLoaded', fetchStarCount);
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': "图片 %1 / %2",
+            'fadeDuration': 300,
+            'positionFromTop': 50
         });
     </script>
 </body>
