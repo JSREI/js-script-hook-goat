@@ -2,39 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Script Hook Goat</title>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YHT7S9LGC3"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-YHT7S9LGC3');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YHT7S9LGC3');
     </script>
+    <!-- Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* 全局样式 */
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #4facfe, #00f2fe); /* 渐变色背景（蓝绿色系） */
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
             color: white;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 50px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar .nav-links a:hover {
+            color: #4facfe;
+        }
+        
+        .github-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .github-link:hover {
+            color: #4facfe;
+        }
+        
+        .github-logo {
+            font-size: 1.5rem;
+        }
+        
+        .star-count {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* 页脚样式 */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 15px 50px;
+            text-align: center;
+            z-index: 1000;
+        }
+        
+        .footer p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 屏幕样式 */
+        .screen {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            flex-direction: column;
+            padding: 80px 20px; /* 为导航栏和页脚留出空间 */
+            scroll-snap-align: start;
         }
-
+        
+        .screen-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        
+        /* 第一屏样式 */
+        .screen-1 {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+        
+        /* 第二屏样式 */
+        .screen-2 {
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+        }
+        
         /* 标题样式 */
         h1 {
             font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 文字阴影 */
-            animation: float 3s ease-in-out infinite; /* 浮动特效 */
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
         }
-
+        
         @keyframes float {
             0%, 100% {
                 transform: translateY(0);
@@ -43,15 +156,15 @@
                 transform: translateY(-10px);
             }
         }
-
+        
         /* 列表样式 */
         ol {
             list-style-type: none;
             padding: 0;
         }
-
+        
         /* 链接样式 */
-        a {
+        .screen a {
             text-decoration: none;
             color: white;
             font-size: 1.5rem;
@@ -63,31 +176,185 @@
             transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
             display: inline-block;
         }
-
-        a:hover {
+        
+        .screen a:hover {
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.4);
-            transform: scale(1.05); /* 鼠标悬停时放大 */
+            transform: scale(1.05);
         }
-
+        
+        /* 加群信息样式 */
+        .join-group {
+            text-align: center;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .join-group h2 {
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        
+        .join-group p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .qr-code {
+            max-width: 200px;
+            margin: 20px auto;
+            display: block;
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+        
+        .join-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .join-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
         /* 响应式设计 */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
             h1 {
                 font-size: 2rem;
             }
-            a {
-                font-size: 1.2rem;
-                padding: 8px 16px;
+            
+            .screen a, .join-group p {
+                font-size: 1.1rem;
+            }
+            
+            .join-group h2 {
+                font-size: 1.8rem;
+            }
+            
+            .github-container {
+                gap: 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar .nav-links {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-<h1>Goat List</h1>
-<ol>
-    <li><a href="jsonp-request-encrypt.html">Script请求参数加密</a></li>
-    <li><a href="jsonp-response-encrypt.html">Script请求响应加密</a></li>
-    <li><a href="jsonp-request-encrypt-and-response-encrypt.html">Script请求参数和响应同时加密</a></li>
-</ol>
+    <!-- 导航栏 -->
+    <div class="navbar">
+        <div class="logo">Script Hook Goat</div>
+        <div class="nav-links">
+            <a href="#screen-1">首页</a>
+            <a href="#screen-2">加入我们</a>
+        </div>
+        <div class="github-container">
+            <a href="https://github.com/JSREI/js-script-hook-goat" class="github-link" target="_blank">
+                <i class="fab fa-github github-logo"></i>
+                <span class="star-count" id="star-count">-</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- 分屏容器 -->
+    <div class="screen-container">
+        <!-- 第一屏：当前内容 -->
+        <div class="screen screen-1" id="screen-1">
+            <h1>Goat List</h1>
+            <ol>
+                <li><a href="jsonp-request-encrypt.html">Script请求参数加密</a></li>
+                <li><a href="jsonp-response-encrypt.html">Script请求响应加密</a></li>
+                <li><a href="jsonp-request-encrypt-and-response-encrypt.html">Script请求参数和响应同时加密</a></li>
+            </ol>
+        </div>
+        
+        <!-- 第二屏：加群信息 -->
+        <div class="screen screen-2" id="screen-2">
+            <div class="join-group">
+                <h2>加入我们的技术社区</h2>
+                <p>欢迎加入我们的JavaScript逆向工程交流群，与其他开发者一起讨论技术、分享经验，共同进步。</p>
+                <p>扫描下方二维码或点击按钮加入：</p>
+                <!-- 这里可以放置实际的二维码图片 -->
+                <img src="https://placeholder-for-qrcode.com/200x200" alt="QR Code" class="qr-code">
+                <p>或添加微信: <strong>JSREI-Group</strong></p>
+                <a href="https://github.com/JSREI" class="join-button" target="_blank">了解更多</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>© 2023-2024 JSREI | 版本 1.0.0 | <a href="https://github.com/JSREI/js-script-hook-goat" style="color: rgba(255, 255, 255, 0.7);" target="_blank">GitHub</a></p>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 获取GitHub star数量
+        function fetchStarCount() {
+            // 检查本地缓存
+            const cachedData = localStorage.getItem('githubStarData');
+            if (cachedData) {
+                const data = JSON.parse(cachedData);
+                // 检查缓存是否在一小时内
+                if (Date.now() - data.timestamp < 3600000) {
+                    document.getElementById('star-count').textContent = data.stars;
+                    return;
+                }
+            }
+            
+            // 如果没有缓存或缓存已过期，则获取新数据
+            fetch('https://api.github.com/repos/JSREI/js-script-hook-goat')
+                .then(response => response.json())
+                .then(data => {
+                    const starCount = data.stargazers_count;
+                    document.getElementById('star-count').textContent = starCount;
+                    
+                    // 保存到本地缓存
+                    localStorage.setItem('githubStarData', JSON.stringify({
+                        stars: starCount,
+                        timestamp: Date.now()
+                    }));
+                })
+                .catch(error => {
+                    console.error('无法获取Star数量:', error);
+                    document.getElementById('star-count').textContent = 'N/A';
+                });
+        }
+        
+        // 页面加载时获取star数量
+        document.addEventListener('DOMContentLoaded', fetchStarCount);
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
