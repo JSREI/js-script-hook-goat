@@ -138,6 +138,8 @@
         /* 第二屏样式 */
         .screen-2 {
             background: linear-gradient(135deg, #43e97b, #38f9d7);
+            padding-top: 100px;
+            padding-bottom: 100px;
         }
         
         /* 标题样式 */
@@ -192,6 +194,8 @@
             border-radius: 15px;
             backdrop-filter: blur(5px);
             border: 2px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+            max-height: 80vh;
         }
         
         .join-group h2 {
@@ -201,29 +205,36 @@
         
         .join-group p {
             font-size: 1.2rem;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            margin-top: 20px;
             line-height: 1.6;
         }
         
         .qr-code {
             max-width: 200px;
-            margin: 20px auto;
+            margin: 10px auto;
             display: block;
             border: 5px solid white;
             border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .qr-code:hover {
+            transform: scale(1.05);
         }
         
         .join-button {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 8px 20px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
             border-radius: 30px;
             font-size: 1.1rem;
-            margin-top: 20px;
             transition: all 0.3s ease;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            margin: 0 5px;
         }
         
         .join-button:hover {
@@ -293,13 +304,15 @@
         <!-- 第二屏：加群信息 -->
         <div class="screen screen-2" id="screen-2">
             <div class="join-group">
-                <h2>加入我们的技术社区</h2>
-                <p>欢迎加入我们的JavaScript逆向工程交流群，与其他开发者一起讨论技术、分享经验，共同进步。</p>
-                <p>扫描下方二维码或点击按钮加入：</p>
-                <!-- 这里可以放置实际的二维码图片 -->
-                <img src="https://placeholder-for-qrcode.com/200x200" alt="QR Code" class="qr-code">
-                <p>或添加微信: <strong>JSREI-Group</strong></p>
-                <a href="https://github.com/JSREI" class="join-button" target="_blank">了解更多</a>
+                <h2>逆向技术交流群</h2>
+                <p>扫码加入逆向技术交流群：</p>
+                <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016230653669.png" alt="逆向技术交流群二维码" class="qr-code">
+                
+                <p>如群二维码过期，可以加我个人微信，发送【逆向群】拉你进群：</p>
+                <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20231030132026541-7614065.png" alt="个人微信二维码" class="qr-code">
+                
+                <p><a href="https://t.me/jsreijsrei" target="_blank" class="join-button">点此</a>或扫码加入TG交流群：</p>
+                <img src="https://cdn.jsdelivr.net/gh/JSREI/.github/profile/README.assets/image-20241016231143315.png" alt="TG交流群二维码" class="qr-code">
             </div>
         </div>
     </div>
