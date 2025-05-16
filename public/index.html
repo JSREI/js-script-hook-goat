@@ -34,33 +34,62 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(25, 35, 60, 0.9);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 15px 50px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .navbar .logo {
             font-size: 1.5rem;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            color: #4facfe;
+            margin-right: 30px;
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 1.8rem;
         }
         
         .navbar .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 30px;
+            margin-right: auto;
         }
         
         .navbar .nav-links a {
             color: white;
             text-decoration: none;
             font-size: 1rem;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: transparent;
+            position: relative;
+        }
+
+        .navbar .nav-links a i {
+            margin-right: 8px;
+            font-size: 1.2rem;
         }
         
         .navbar .nav-links a:hover {
+            color: #4facfe;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .navbar .nav-links a.active {
+            background: rgba(79, 172, 254, 0.2);
             color: #4facfe;
         }
         
@@ -68,30 +97,37 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-left: 20px;
         }
         
         .github-link {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             color: white;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .github-link:hover {
             color: #4facfe;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
         
         .github-logo {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         
         .star-count {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(79, 172, 254, 0.3);
             padding: 3px 10px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
         
         /* 页脚样式 */
@@ -276,10 +312,17 @@
 <body>
     <!-- 导航栏 -->
     <div class="navbar">
-        <div class="logo">Script Hook Goat</div>
+        <div class="logo">
+            <i class="fas fa-code-branch logo-icon"></i>
+            Script Hook Goat
+        </div>
         <div class="nav-links">
-            <a href="#screen-1">首页</a>
-            <a href="#screen-2">加入我们</a>
+            <a href="#screen-1" class="active">
+                <i class="fas fa-list-alt"></i>靶场列表
+            </a>
+            <a href="#screen-2">
+                <i class="fas fa-users"></i>加入我们
+            </a>
         </div>
         <div class="github-container">
             <a href="https://github.com/JSREI/js-script-hook-goat" class="github-link" target="_blank">
@@ -356,15 +399,43 @@
                 });
         }
         
-        // 页面加载时获取star数量
-        document.addEventListener('DOMContentLoaded', fetchStarCount);
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取star数
+            fetchStarCount();
+            
+            // 导航激活状态处理
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const sections = document.querySelectorAll('.screen');
+            
+            function setActiveLink() {
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - sectionHeight/3)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', setActiveLink);
+            setActiveLink(); // 初始设置
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
         });
