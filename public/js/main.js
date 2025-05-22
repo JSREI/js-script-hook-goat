@@ -1,14 +1,47 @@
 // 获取GitHub仓库的star数
 document.addEventListener('DOMContentLoaded', function() {
-    // 获取GitHub仓库星星数
-    fetch('https://api.github.com/repos/JSREI/js-script-hook-goat')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('star-count').textContent = data.stargazers_count || 0;
-        })
-        .catch(error => {
-            console.error('获取仓库数据失败:', error);
-        });
+    // 获取GitHub仓库星星数，添加缓存功能
+    function fetchGitHubStars() {
+        const cacheKey = 'github-stars-cache';
+        const cacheTimeKey = 'github-stars-cache-time';
+        const cacheExpiration = 60 * 60 * 1000; // 1小时的缓存时间（毫秒）
+        
+        // 检查缓存是否存在且未过期
+        const cachedStars = localStorage.getItem(cacheKey);
+        const cachedTime = localStorage.getItem(cacheTimeKey);
+        const now = new Date().getTime();
+        
+        // 如果有缓存且未过期，直接使用缓存数据
+        if (cachedStars && cachedTime && (now - parseInt(cachedTime)) < cacheExpiration) {
+            console.log('使用缓存的GitHub stars数据');
+            document.getElementById('star-count').textContent = cachedStars;
+            return;
+        }
+        
+        // 缓存不存在或已过期，请求新数据
+        console.log('缓存已过期或不存在，请求GitHub API');
+        fetch('https://api.github.com/repos/JSREI/js-script-hook-goat')
+            .then(response => response.json())
+            .then(data => {
+                const starCount = data.stargazers_count || 0;
+                // 更新页面显示
+                document.getElementById('star-count').textContent = starCount;
+                // 存储到缓存
+                localStorage.setItem(cacheKey, starCount);
+                localStorage.setItem(cacheTimeKey, now);
+            })
+            .catch(error => {
+                console.error('获取仓库数据失败:', error);
+                // 如果有缓存但已过期，在请求失败时仍使用过期的缓存
+                if (cachedStars) {
+                    console.log('API请求失败，使用过期的缓存数据');
+                    document.getElementById('star-count').textContent = cachedStars;
+                }
+            });
+    }
+    
+    // 调用函数获取star数
+    fetchGitHubStars();
     
     // 分屏导航功能
     const screenDots = document.querySelectorAll('.screen-dot');
